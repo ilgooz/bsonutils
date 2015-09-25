@@ -9,7 +9,7 @@ import (
 // ObjectId returns the bson.ObjectId value represented by str. Any invalid value causes to return an error
 func ObjectId(str string) (id bson.ObjectId, err error) {
 	if !bson.IsObjectIdHex(str) {
-		return id, errors.New("string doesn't represents a bson.ObjectId")
+		return id, errors.New("string does not represent a bson.ObjectId")
 	}
 	return bson.ObjectIdHex(str), nil
 }
