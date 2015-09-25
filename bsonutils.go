@@ -1,11 +1,15 @@
 package bsonutils
 
-import "gopkg.in/mgo.v2/bson"
+import (
+	"errors"
 
-func ObjectId(s string) (bson.ObjectId, bool) {
-	var id bson.ObjectId
-	if !bson.IsObjectIdHex(s) {
-		return id, false
+	"gopkg.in/mgo.v2/bson"
+)
+
+// ObjectId returns the bson.ObjectId value represented by str. Any invalid value causes to return an error
+func ObjectId(str string) (id bson.ObjectId, err error) {
+	if !bson.IsObjectIdHex(str) {
+		return id, errors.New("string doesn't represents a bson.ObjectId")
 	}
-	return bson.ObjectIdHex(s), true
+	return bson.ObjectIdHex(str), nil
 }
